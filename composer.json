@@ -15,6 +15,9 @@
     "autoload": {
         "psr-4": {
             "fzed51\\Import\\": "src/"
-        }
+        },
+        "files": [
+            "src/function.php"
+        ]
     }
 }

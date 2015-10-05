@@ -1,6 +1,11 @@
 <?php
 
-include './import.php';
-fzed51\import\from('./test.php')->import('hello');
+include './vendor/autoload.php';
+
+from('./lib.php')->import('hello');
+
+// is Ok
 hello('Fabien');
+
+// throw an fatal error
 by('Fabien');

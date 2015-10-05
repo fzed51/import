@@ -1,14 +1,40 @@
 <?php
 
-namespace fzed51\import;
+/*
+ * The MIT License
+ *
+ * Copyright 2015 fabien.sanchez.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+namespace fzed51\Import;
 
 /**
+ * Description of SourceFile
  * Import de fonction façon python
  * from("monfichiersource.php")->import("mafonction");
+ *
+ * @author fabien.sanchez
  */
 class SourceFile {
 
-    //static private $__History = array();
     static public $history = array();
     private $fileName;
     private $tokens;
@@ -18,7 +44,7 @@ class SourceFile {
             $this->fileName = $filename;
             $this->scanFile();
         } else {
-            throw new Exception();
+            throw new \Exception();
         }
     }
 
@@ -94,16 +120,11 @@ class SourceFile {
 
     function import($function) {
         if (!isset(self::$history[$this->fileName][$function])) {
-            throw new Exception("La fonction '{$function}' n'est pas défine dans '{$this->fileName}'.");
+            throw new \Exception("La fonction '{$function}' n'est pas défine dans '{$this->fileName}'.");
         }
         // echo 'impor de : ' . PHP_EOL . htmlentities(self::$__History[$this->_fileName][$function]);
         eval(self::$history[$this->fileName][$function]);
         return $this;
     }
 
-}
-
-function from(/* string */ $fileName) {
-    $sf = new SourceFile($fileName);
-    return $sf;
 }
